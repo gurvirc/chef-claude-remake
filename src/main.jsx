@@ -22,6 +22,14 @@ export default function Main() {
             <h2>Ingredients on hand:</h2>
             <ul>{listOfIngredients}</ul>
         </section>
+
+        <section className="Get-recipe-container">
+            <div>
+            <h3>Ready for a recipe?</h3>
+            <p>Generate a recipe from your list of ingredients</p>
+            </div>
+            <button>Generate a recipe</button>
+        </section>
         </main>
     )
 }
