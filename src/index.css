@@ -66,3 +66,30 @@ main {
   padding-left:400px;
   font-weight: 400;
 }
+
+.Ingredients-list-items li {
+  margin-bottom: 10px; /* Adds space between each list item */
+  font-size: 16px; /* Optional: change font size */
+  line-height: 1.5; /* Optional: adjust line height for better readability */
+}
+
+.Get-recipe-container{
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    background: #F0EFEB;
+    padding: 10px 28px;
+    color: #6B7280;
+}
+
+
+.Get-recipe-container > button{
+  background-color: #D17557;
+  border: none;
+  color: white;
+  padding: 20px 20px 20px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 15px;
+}
