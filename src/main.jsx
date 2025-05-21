@@ -1,5 +1,6 @@
 import React from "react"
 import Recipe from "./Recipe"
+import Ingredients from "./Ingredients"
 export default function Main() {
     
     const [ingredients, setIngredients]=React.useState([])
@@ -26,17 +27,8 @@ export default function Main() {
             <button>+ Add Ingredient</button>
         </form>
         <section className="Ingredients-list-items">
-            {ingredients.length>0 && <h2>Ingredients on hand:</h2>}
-            <ul>{listOfIngredients}</ul>
+            {ingredients.length>0 && <Ingredients ingredients={ingredients} handleClick={handleClick} listOfIngredients={listOfIngredients}/>}
         </section>
-
-        {ingredients.length > 4 && <section className="Get-recipe-container">
-            <div>
-            <h3>Ready for a recipe?</h3>
-            <p>Generate a recipe from your list of ingredients</p>
-            </div>
-            <button onClick={handleClick}>Generate a recipe</button>
-        </section>}
         {showRecipe && <Recipe />}
         </main>
     )
