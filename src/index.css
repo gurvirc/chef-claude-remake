@@ -63,14 +63,15 @@ main {
 .Ingredients-list-items{
   margin-top: 40px;;
   font-family: 'Inter', sans-serif;
-  padding-left:200px;
   font-weight: 400;
+  padding-left: 400px;
 }
 
 .Ingredients-list-items li {
   margin-bottom: 10px; /* Adds space between each list item */
   font-size: 16px; /* Optional: change font size */
   line-height: 1.5; /* Optional: adjust line height for better readability */
+  
 }
 
 .Get-recipe-container{

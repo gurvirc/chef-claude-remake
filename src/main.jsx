@@ -26,7 +26,7 @@ export default function Main() {
             <input type="text" name="ingredient" placeholder="   eg.oregano"></input>
             <button>+ Add Ingredient</button>
         </form>
-        <section className="Ingredients-list-items">
+        <section>
             {ingredients.length>0 && <Ingredients ingredients={ingredients} handleClick={handleClick} listOfIngredients={listOfIngredients}/>}
         </section>
         {showRecipe && <Recipe />}
