@@ -19,12 +19,16 @@ export default function Main() {
     function handleClick(){
         setShowRecipe(prev=> !prev)
     }
+    function macroCLick(){
+        
+    }
 
     return(
         <main>
         <form action={addIngredient} className="input-form-ingredients">
             <input type="text" name="ingredient" placeholder="   eg.oregano"></input>
             <button>+ Add Ingredient</button>
+            <button onClick={macroCLick}>Add Macros</button>
         </form>
         <section>
             {ingredients.length>0 && <Ingredients ingredients={ingredients} handleClick={handleClick} listOfIngredients={listOfIngredients}/>}
