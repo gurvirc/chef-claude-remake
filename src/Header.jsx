@@ -11,7 +11,7 @@ export default function Header(){
                 <Link to="/Login" className="login-signup">
                     <button >Log in</button>
                 </Link>
-                <Link to="Signup" className="login-signup">
+                <Link to="/Signup" className="login-signup">
                     <button>Sign up</button>
                 </Link>
             </div>

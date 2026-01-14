@@ -128,9 +128,9 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
+
   width: 500px;
-  height: 400px;
+  height: 500px;
 }
 
 .login-form > h1{
@@ -159,3 +159,15 @@ main {
   border-radius: 3px;
 }
 
+.login-form > img{
+  width: 50px;
+  margin-bottom: 50px;
+}
+
+.login-form > p{
+  font-size: 14px;
+}
+
+.Login-link{
+  text-decoration: none;
+}
