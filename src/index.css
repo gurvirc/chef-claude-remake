@@ -171,3 +171,8 @@ main {
 .Login-link{
   text-decoration: none;
 }
+
+.signUp-error{
+  color: #B91C1C;
+  
+}
