@@ -6,7 +6,7 @@ const app= express()
 const PORT= 3000
 
 app.use(cors({
-    origin: 'http://localhost:5173'
+    origin: 'http://localhost:5173'//where our react/vite is running
 }))
 app.use(express.json())//this is required to be able to access req.body params
 
