@@ -1,5 +1,6 @@
 import validator from 'validator'
-import { getDBConnection } from '../db/db'
+import { getDBConnection } from '../db/db.js'
+import bcrypt from 'bcryptjs'
 
 export async function registerUser(req, res) {
 
@@ -24,12 +25,18 @@ export async function registerUser(req, res) {
     }
 
     try {
+
+        password = await bcrypt.hash(password, 10)
+        
+
+
+
         const db = await getDBConnection()
 
         const emailExists= await db.get('SELECT * FROM user WHERE email = ? ', [email])
         const usernameExists = await db.get('SELECT * FROM user WHERE username = ? ', [username])
 
-        if(!emailExists || !usernameExists){
+        if(emailExists || usernameExists){
             return res.status(400).json({error: 'Email or username alreader in use'})
         }
 
@@ -49,5 +56,5 @@ export async function registerUser(req, res) {
 
 
 
-    console.log('req.body: ', req.body)
+    
 }
