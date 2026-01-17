@@ -40,8 +40,11 @@ export async function registerUser(req, res) {
             return res.status(400).json({error: 'Email or username alreader in use'})
         }
 
-        db.run('INSERT INTO user (name, username, email, name, password) VALUES (?, ?, ?, ?, ?)', [name, username, email, name, password])
+        const result= db.run('INSERT INTO user (name, username, email, name, password) VALUES (?, ?, ?, ?, ?)', [name, username, email, name, password])
         res.status(201).json({message: 'User succefully registered'})
+
+        //each insertions returns last id, use this to bind session id to specified user
+        req.session.userId = result.lastID
 
 
 
@@ -50,11 +53,39 @@ export async function registerUser(req, res) {
         res.status(500).json({error: 'Registration failed. Please try again'})
     }
 
+}
 
+export async function loginUser(req, res){
+    let { username, password } = req.body
+    username = username.trim()
 
+    if(!username|| !password){
+        return res.status(400).json({error: 'All fields required'})
+    }
 
-
-
-
+    try{
     
+        const db = await getDBConnection()
+        const user = await db.get(`SELECT * FROM user WHERE username = ?`, [username])
+
+        if(!user){
+            return res.status(400).json({error: 'Invalid credentials'})
+        }
+    
+
+        const passwordMatch = await bcrypt.compare(password, user.password)
+
+        if(!passwordMatch){
+            return res.status(400).json({error: 'Invalid credentials'})
+        }else{
+            req.session.userId = user.id
+            res.status(200).json({message: 'Logged in'})
+        }
+
+
+    }catch(err){
+        res.status(500).json({error: 'Login failed. Please try again'})
+    }
+
+
 }
