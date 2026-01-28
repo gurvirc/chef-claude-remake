@@ -34,6 +34,11 @@ header {
  font-size: 32px;
 }
 
+.center > p{
+  margin-left: 20px;
+
+}
+
 .login-signup > button{
     font-family: Inter, sans-serif;
     border-radius: 6px;
