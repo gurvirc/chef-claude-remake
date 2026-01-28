@@ -1,10 +1,12 @@
 import ChefClaudeLogo from './images/ChefClaudeIcon.png'
 import { useNavigate } from 'react-router-dom' 
 import React from 'react'
+import { authContext } from './AuthContextProvider'
 
 export default function Login(){
     const [loginError, setLoginError] = React.useState("")
     const navigate = useNavigate()
+    const { name, setName } = React.useContext(authContext)
 
     async function handleLogin(e){
         e.preventDefault()
@@ -29,6 +31,8 @@ export default function Login(){
 
             if(res.ok){
                 navigate('/')
+                setName(data.name)
+                console.log(name)
             }else{
                 setLoginError(data.error)
             }

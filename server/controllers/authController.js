@@ -41,7 +41,7 @@ export async function registerUser(req, res) {
         }
 
         const result= db.run('INSERT INTO user (name, username, email, name, password) VALUES (?, ?, ?, ?, ?)', [name, username, email, name, password])
-        res.status(201).json({message: 'User succefully registered'})
+        res.status(201).json({message: 'User succefully registered', name:`${user.name}`})//also return users name here
 
         //each insertions returns last id, use this to bind session id to specified user
         req.session.userId = result.lastID
@@ -79,7 +79,7 @@ export async function loginUser(req, res){
             return res.status(400).json({error: 'Invalid credentials'})
         }else{
             req.session.userId = user.id
-            res.status(200).json({message: 'Logged in'})
+            res.status(200).json({message: 'Logged in', name: `${user.name}`})
         }
 
 
