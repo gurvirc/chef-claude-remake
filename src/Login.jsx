@@ -2,6 +2,7 @@ import ChefClaudeLogo from './images/ChefClaudeIcon.png'
 import { useNavigate } from 'react-router-dom' 
 import React from 'react'
 import { authContext } from './AuthContextProvider'
+import { Link } from 'react-router-dom'
 
 export default function Login(){
     const [loginError, setLoginError] = React.useState("")
@@ -58,6 +59,7 @@ export default function Login(){
                 </div>
                 
                 <button type="submit">Login</button>
+                <p>Dont have an account?<Link className='Login-link' to="/signup"> Sign up here</Link></p>
                 <p className="signUp-error">{loginError}</p>
 
             </form>
