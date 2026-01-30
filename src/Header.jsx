@@ -15,8 +15,8 @@ export default function Header(){
             <div className="login-signup">
                 <Link to="/Login" className="login-signup">
                     {!name &&<button >Log in</button>}
-                    {name && <button>Log out</button>}
                 </Link>
+                {name && <button>Log out</button>}
                 <Link to="/Signup" className="login-signup">
                     {!name && <button>Sign up</button>}
                 </Link>
