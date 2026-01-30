@@ -43,8 +43,8 @@ header {
     font-family: Inter, sans-serif;
     border-radius: 6px;
     border: none;
-    background-color: #141413;
-    color: #FAFAF8;
+    background-color: white;
+    color: black;
     width: 70px;
     height: 35px;
     font-size: 0.875rem;
@@ -121,6 +121,7 @@ main {
   border-radius: 6px;
   font-weight: 500;
   font-size: 15px;
+  cursor: pointer;
 }
 
 .login-page{
@@ -194,4 +195,23 @@ main {
 
 .recipe-container ul li, .recipe-container ol li {
     margin-bottom: 8px;
+}
+
+button.My-recipes {
+  width: 100px;
+  background-color: #D17557 ;
+  color: white;
+}
+
+.Save-Recipe {
+   width: 100px;
+  background-color: #D17557 ;
+  color: white;
+  border-style: none;
+  border-radius: 6px;
+  width: 150px;
+  height: 50px;
+  font-size: medium;
+  cursor: pointer;
+
 }

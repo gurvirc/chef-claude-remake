@@ -40,7 +40,7 @@ export async function registerUser(req, res) {
             return res.status(400).json({error: 'Email or username alreader in use'})
         }
 
-        const result= db.run('INSERT INTO user (name, username, email, name, password) VALUES (?, ?, ?, ?, ?)', [name, username, email, name, password])
+        const result= await db.run('INSERT INTO user (name, username, email, password) VALUES (?, ?, ?, ?)', [name, username, email, password])
         res.status(201).json({message: 'User succefully registered', name:`${user.name}`})//also return users name here
 
         //each insertions returns last id, use this to bind session id to specified user
@@ -78,8 +78,15 @@ export async function loginUser(req, res){
         if(!passwordMatch){
             return res.status(400).json({error: 'Invalid credentials'})
         }else{
-            req.session.userId = user.id
-            res.status(200).json({message: 'Logged in', name: `${user.name}`})
+
+            req.session.regenerate((err)=>{
+                if(err){
+                    return res.status(500).json({error: 'Failed to log in'})
+                }
+            
+                req.session.userId = user.id
+                res.status(200).json({message: 'Logged in', name: `${user.name}`})
+            })
         }
 
 
@@ -87,5 +94,34 @@ export async function loginUser(req, res){
         res.status(500).json({error: 'Login failed. Please try again'})
     }
 
+
+}
+
+export async function logoutUser(req, res){
+
+    const userId = req.session?.userId
+
+    if(!userId){
+        return res.status(400).json({error: 'User is not logged in'})
+    }
+
+    req.session.destroy((err)=>{
+        if(err){
+            console.log('logout error')
+            return res.status(500).json({error: 'Failed to log out user'})
+        }
+
+        res.clearCookie('connect.sid', {
+            httpOnly:true, 
+            secure: false, 
+            sameSite: 'lax',
+            path: '/'
+        })
+
+        res.status(200).json({message: 'User succesfully logged out'})
+
+
+        
+    })
 
 }

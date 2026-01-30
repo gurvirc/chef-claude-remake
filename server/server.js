@@ -24,6 +24,7 @@ app.use(session({
         httpOnly:true, //prevents cross site scripting attacks
         secure: false, //allows cookie to be sent over http and not only https since were in developemnt
         sameSite: 'lax'
+        //add a maxAge property for how long until a users cookie expires
     }
 }))
 
