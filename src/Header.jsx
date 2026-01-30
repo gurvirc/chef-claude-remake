@@ -14,10 +14,11 @@ export default function Header(){
             </div>
             <div className="login-signup">
                 <Link to="/Login" className="login-signup">
-                    <button >Log in</button>
+                    {!name &&<button >Log in</button>}
                 </Link>
+                {name && <button>Log out</button>}
                 <Link to="/Signup" className="login-signup">
-                    <button>Sign up</button>
+                    {!name && <button>Sign up</button>}
                 </Link>
             </div>
         </header>

@@ -1,6 +1,7 @@
 import React from "react"
 import Recipe from "./Recipe"
 import Ingredients from "./Ingredients"
+import ReactMarkdown from 'react-markdown'
 export default function Main() {
     
     const [ingredients, setIngredients]=React.useState([])
@@ -54,7 +55,9 @@ export default function Main() {
         <section>
             {ingredients.length>0 && <Ingredients ingredients={ingredients} handleClick={handleClick} listOfIngredients={listOfIngredients}/>}
         </section>
-        {recipe}
+        <section className="recipe-container">
+            <ReactMarkdown>{recipe}</ReactMarkdown>
+        </section>
         </main>
     )
 }
