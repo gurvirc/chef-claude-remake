@@ -4,6 +4,7 @@ import Ingredients from "./Ingredients"
 export default function Main() {
     
     const [ingredients, setIngredients]=React.useState([])
+    const [recipe, setRecipe ] = React.useState("")
     const [showRecipe, setShowRecipe]= React.useState(false)
 
 
@@ -16,24 +17,44 @@ export default function Main() {
         setIngredients(prev=> [...prev, newIngredient])
     }
 
-    function handleClick(){
-        setShowRecipe(prev=> !prev)
+    async function handleClick(){
+        try{
+            const res = await fetch('http://localhost:3000/api/recipe', {
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ingredients: ingredients
+                })
+                
+            })
+            const data = await res.json()
+
+            if(res.ok){
+                console.log(data.recipe)
+                setRecipe(data.recipe)
+            }
+
+
+        }catch(err){
+            console.log('error fetching recipe')
+
+        }
     }
-    function macroCLick(){
-        
-    }
+
 
     return(
         <main>
         <form action={addIngredient} className="input-form-ingredients">
             <input type="text" name="ingredient" placeholder="   eg.oregano"></input>
             <button>+ Add Ingredient</button>
-            <button onClick={macroCLick}>Add Macros</button>
+            <button >Add Macros</button>
         </form>
         <section>
             {ingredients.length>0 && <Ingredients ingredients={ingredients} handleClick={handleClick} listOfIngredients={listOfIngredients}/>}
         </section>
-        {showRecipe && <Recipe />}
+        {recipe}
         </main>
     )
 }

@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { authRouter } from './routes/auth.js'
+import { apiRouter } from './routes/api.js'
 import session from 'express-session'
 import dotenv from "dotenv";
 
@@ -27,6 +28,8 @@ app.use(session({
 }))
 
 app.use('/api/auth', authRouter)
+app.use('/api', apiRouter)
+
 
 
 
