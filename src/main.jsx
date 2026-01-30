@@ -8,6 +8,8 @@ export default function Main() {
     const [recipe, setRecipe ] = React.useState("")
     const [showRecipe, setShowRecipe]= React.useState(false)
 
+    const recipeSection = React.useRef(null)
+
 
     const listOfIngredients= ingredients.map(ingredient=> (
         <li key={ingredient}>{ingredient}</li>
@@ -44,6 +46,13 @@ export default function Main() {
         }
     }
 
+    React.useEffect(()=>{
+        if(recipe && recipeSection){
+            recipeSection.current.scrollIntoView({behavior: "smooth"})
+        }
+
+    }, [recipe])
+
 
     return(
         <main>
@@ -53,9 +62,15 @@ export default function Main() {
             <button >Add Macros</button>
         </form>
         <section>
-            {ingredients.length>0 && <Ingredients ingredients={ingredients} handleClick={handleClick} listOfIngredients={listOfIngredients}/>}
+            {ingredients.length>0 && 
+                <Ingredients
+                    ref= {recipeSection} 
+                    ingredients={ingredients} 
+                    handleClick={handleClick} 
+                    listOfIngredients={listOfIngredients}/>}
         </section>
         <section className="recipe-container">
+            {recipe && <h1>Chef Claude Recommends:</h1>}
             <ReactMarkdown>{recipe}</ReactMarkdown>
         </section>
         </main>

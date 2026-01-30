@@ -121,6 +121,7 @@ main {
   border-radius: 6px;
   font-weight: 500;
   font-size: 15px;
+  cursor: pointer;
 }
 
 .login-page{
