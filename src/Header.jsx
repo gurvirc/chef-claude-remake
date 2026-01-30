@@ -46,7 +46,12 @@ export default function Header(){
                 <Link to="/Login" className="login-signup">
                     {!name &&<button >Log in</button>}
                 </Link>
-                {name && <button onClick={handleLogout}>Log out</button>}
+                {name && 
+                <>
+                    <button className="My-recipes">My recipes</button>
+                    <button onClick={handleLogout}>Log out</button>
+                </>
+                }
                 <Link to="/Signup" className="login-signup">
                     {!name && <button>Sign up</button>}
                 </Link>

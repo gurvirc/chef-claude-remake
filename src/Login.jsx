@@ -60,6 +60,7 @@ export default function Login(){
                 
                 <button type="submit">Login</button>
                 <p>Dont have an account?<Link className='Login-link' to="/signup"> Sign up here</Link></p>
+                <p>Or continue as <Link to="/">guest</Link></p>
                 <p className="signUp-error">{loginError}</p>
 
             </form>

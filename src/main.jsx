@@ -70,9 +70,15 @@ export default function Main() {
                     listOfIngredients={listOfIngredients}/>}
         </section>
         <section className="recipe-container">
-            {recipe && <h1>Chef Claude Recommends:</h1>}
-            <ReactMarkdown>{recipe}</ReactMarkdown>
+            {recipe && 
+            <div>
+                <h1>Chef Claude Recommends:</h1>
+                <ReactMarkdown>{recipe}</ReactMarkdown>
+                <button className="Save-Recipe">Save Recipe</button>
+            </div>
+    }
         </section>
+
         </main>
     )
 }
