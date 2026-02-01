@@ -11,7 +11,25 @@ const client= new InferenceClient(process.env.HF_API_KEY)
         suggests a recipe they could make with some or all of those ingredients. You don't need to
         use every ingredient they mention in your recipe. The recipe can include additional 
         ingredients they didn't mention, but try not to include too many extra ingredients. Format 
-        your response in markdown to make it easier to render to a web page`
+        your response in markdown to make it easier to render to a web page
+        Generate a recipe using the given ingredients.
+
+Return:
+1) A JSON object with metadata
+2) A Markdown recipe for display
+
+Format EXACTLY like this:
+
+---JSON---
+{
+  "title": "",
+  "description": "",
+  "servings": number,
+  "timeMinutes": number
+}
+---MARKDOWN---
+# Recipe Title
+...`
 
 export async function recipeServices(ingredientsArr){
 
