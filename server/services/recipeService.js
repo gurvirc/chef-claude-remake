@@ -15,7 +15,7 @@ const client= new InferenceClient(process.env.HF_API_KEY)
         Generate a recipe using the given ingredients.
 
 Return:
-1) A JSON object with metadata
+1) A JSON object with metadata, (must include all the fields listed)
 2) A Markdown recipe for display
 
 Format EXACTLY like this:
@@ -25,7 +25,8 @@ Format EXACTLY like this:
   "title": "",
   "description": "",
   "servings": number,
-  "timeMinutes": number
+  "timeMinutes": number,
+  "difficulty": ""
 }
 ---MARKDOWN---
 # Recipe Title

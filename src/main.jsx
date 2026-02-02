@@ -12,6 +12,8 @@ export default function Main() {
     const recipeSection = React.useRef(null)
 
 
+    
+
     const listOfIngredients= ingredients.map(ingredient=> (
         <li key={ingredient}>{ingredient}</li>
     ))
@@ -42,7 +44,7 @@ export default function Main() {
                 const markDown = data.recipe.split('---MARKDOWN---')[1]
 
                 const recipeObj= JSON.parse(jsonPart)
-                setRecipeObj(jsonPart)
+                setRecipeObj(recipeObj)
                 console.log('This is the recipe object')
                 console.log(recipeObj)
                 setRecipe(markDown)
@@ -66,7 +68,7 @@ export default function Main() {
 
    async function saveRecipe(){
     try {
-         const res = await fetch('http://localhost:3000/api/add', {
+         const res = await fetch('http://localhost:3000/api/addRecipe', {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json'
@@ -75,7 +77,9 @@ export default function Main() {
                 title: recipeObj.title,
                 description: recipeObj.description,
                 servings: recipeObj.servings,
-                timeMinutes: recipeObj.timeMinutes 
+                timeMinutes: recipeObj.timeMinutes,
+                difficulty: recipeObj.difficulty,
+                recipe: recipe
             })
          }) 
 
@@ -83,11 +87,36 @@ export default function Main() {
 
          if(res.ok){
             console.log('recipe succesfully saved')
+            console.log(data)
          }
     } catch (error) {
         console.log('An error occurred saving the recipe')
     }
     }
+
+    async function getImg(){
+        try {
+            const res = await fetch('http://localhost:3000/api/getImg', {
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: {
+                    title: recipeObj.title
+                }
+            })
+
+            const data = res.json()
+            console.log('img succesfully recieved')
+            console.log(data)
+
+
+        } catch (err) {
+            console.log('Erro fetching img', err)
+        }
+    }
+
+    
 
 
     return(
@@ -109,6 +138,7 @@ export default function Main() {
             {recipe && 
             <div>
                 <h1>Chef Claude Recommends:</h1>
+               
                 <ReactMarkdown>{recipe}</ReactMarkdown>
                 <button onClick={saveRecipe} className="Save-Recipe">Save Recipe</button>
             </div>
