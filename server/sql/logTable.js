@@ -4,7 +4,7 @@ async function logTable(){
 
     const db = await getDBConnection()
 
-    const tableName = 'user'
+    const tableName = 'saved_recipes'
 
     try {
         const table = await db.all(`SELECT * FROM ${tableName}`)

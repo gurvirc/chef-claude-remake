@@ -4,6 +4,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  margin: 0;
 }
 
 header {
@@ -198,9 +199,17 @@ main {
 }
 
 button.My-recipes {
-  width: 100px;
-  background-color: #D17557 ;
-  color: white;
+   font-family: Inter, sans-serif;
+    border-radius: 6px;
+    border: none;
+    background-color: #D17557;
+    color: white;
+    width: 100px;
+    height: 35px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-right: 30px;
+    cursor: pointer;
 }
 
 .Save-Recipe {
@@ -215,3 +224,100 @@ button.My-recipes {
   cursor: pointer;
 
 }
+
+.recipe-page{
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 50px;
+  background-color: lightgrey;
+ 
+}
+
+
+.recipe-card {
+  width: 400px;
+  border-radius: 12px;
+  background-color: white;
+  
+}
+
+.recipe-card > img{
+  width: 400px;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.recipe-info {
+  padding: 20px;
+}
+
+.recipe-meta {
+  display: flex;
+  color: grey;
+  border-top: solid 1px grey;
+  padding-top: 11px;
+
+  
+  
+}
+
+.recipe-time {
+  display: flex;
+  gap: 5px;
+
+  width: 100px;
+}
+
+.recipe-serving{
+  display: flex;
+  width: 150px;
+  gap: 5px;
+  
+  
+}
+
+.time-serving {
+  display: flex;
+  margin-right: 100px;
+  gap: 20px;
+
+}
+
+svg {
+  width: 20px;
+  height: 20px;
+}
+
+.easy {
+  background-color: #b5f7c7;
+  color: green;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 17px;
+}
+
+.medium {
+  background-color: #f7f49e;
+  color: brown;
+  padding: 5px 10px;
+  border-radius: 5px;
+  
+}
+
+.hard {
+  background-color: #ffcfcf;
+  color: #B91C1C;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 17px;
+}
+
+.link-home {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+

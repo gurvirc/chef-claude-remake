@@ -37,18 +37,20 @@ export default function Header(){
 
     return(
         <header>
+            <Link to="/" className="link-home">
             <div className="center">
                 <img src={chefClaudeLogo}></img>
                 <h1>Chef Claude V2</h1>
                 <p>{name? `Welcome, ${name}`:""}</p>
             </div>
+            </Link>
             <div className="login-signup">
                 <Link to="/Login" className="login-signup">
                     {!name &&<button >Log in</button>}
                 </Link>
                 {name && 
                 <>
-                    <button className="My-recipes">My recipes</button>
+                    <Link to="/savedRecipes"><button className="My-recipes">My recipes</button></Link>
                     <button onClick={handleLogout}>Log out</button>
                 </>
                 }
