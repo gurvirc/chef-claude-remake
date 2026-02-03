@@ -125,6 +125,9 @@ main {
   cursor: pointer;
 }
 
+.Get-recipe-container > button:hover{
+  background-color: #B85F42;
+}
 .login-page{
   display: flex;
   justify-content: center;
@@ -212,6 +215,10 @@ button.My-recipes {
     cursor: pointer;
 }
 
+button.My-recipes:hover{
+  background-color: #A04E35;
+}
+
 .Save-Recipe {
    width: 100px;
   background-color: #D17557 ;
@@ -223,6 +230,10 @@ button.My-recipes {
   font-size: medium;
   cursor: pointer;
 
+}
+
+.Save-Recipe:hover{
+  background-color: #A04E35;
 }
 
 .recipe-page{
@@ -321,3 +332,21 @@ svg {
   cursor: pointer;
 }
 
+.loader{
+  width: 20px;
+  height: 20px;
+  border: 2px solid;
+  border-color: #fff transparent;
+  border-radius: 50%;
+  animation: load 1s linear infinite;
+}
+@keyframes load{
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+.loading-btn{
+  display: flex;
+  gap: 30px;
+}
