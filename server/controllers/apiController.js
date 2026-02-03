@@ -1,6 +1,7 @@
 import express from 'express'
 import { recipeServices } from '../services/recipeService.js'
 import { getDBConnection } from '../db/db.js' 
+import { createApi } from 'unsplash-js';
 import dotenv from 'dotenv'
 
 export async function callAPI(req, res){
@@ -20,17 +21,48 @@ export async function callAPI(req, res){
 export async function addRecipe(req, res){
 
     console.log(req.body)
-    const { title, description, servings, timeMinutes, difficulty, recipe } = req.body
-    if(!title || !description || !servings || !timeMinutes || !difficulty || !recipe){
+    const { title, description, servings, timeMinutes, difficulty, recipe, imgUrl } = req.body
+    if(!title || !description || !servings || !timeMinutes || !difficulty || !recipe ||!imgUrl){
         return res.status(400).json({error: 'Missing some attributes'})
     }
-    res.status(200).json({title, description, servings, timeMinutes, difficulty, recipe})
+    
 
-
+    try{
+    const userId= req.session.userId
+    console.log('this is the session id', userId)
     const db= await getDBConnection()
+
+    const result = await db.run(`INSERT INTO saved_recipes (userId, title, description, servings, time, difficulty, recipe, imgPath)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [userId, title, description, servings, timeMinutes, difficulty, recipe, imgUrl])
+
+        return res.status(200).json({msg: 'recipe succesfully added'})
+
+    }catch(err){
+        console.log(err)
+    }
 }
 
 export async function getImg(req, res){
-    dotenv.config()
-    
+const { title } = req.body
+const response = await fetch(
+    `https://api.spoonacular.com/recipes/complexSearch?query=${title}&number=1&apiKey=${process.env.SPOONACULAR_API_KEY}`
+);
+const data = await response.json();
+const imgUrl = data.results[0]?.image;
+
+res.status(200).json(imgUrl)
+
+}
+
+export async function fetchRecipes(req, res){
+
+    if(!req.session.userId){
+        return res.status(400).json({error: 'No user is logged in'})
+    }
+
+    const db = await getDBConnection()
+
+    const result = await db.all(`SELECT * FROM saved_recipes WHERE userId = ?`, [req.session.userId])
+
+    res.status(200).json(result)
 }

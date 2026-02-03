@@ -8,6 +8,7 @@ export default function Main() {
     const [recipe, setRecipe ] = React.useState("")
     const [showRecipe, setShowRecipe]= React.useState(false)
     const [recipeObj, setRecipeObj] = React.useState(null)
+    const [img, setImg] = React.useState("")
 
     const recipeSection = React.useRef(null)
 
@@ -66,27 +67,29 @@ export default function Main() {
 
     }, [recipe])
 
-   async function saveRecipe(){
+   async function saveRecipe(img){
     try {
          const res = await fetch('http://localhost:3000/api/addRecipe', {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify({
                 title: recipeObj.title,
                 description: recipeObj.description,
                 servings: recipeObj.servings,
                 timeMinutes: recipeObj.timeMinutes,
                 difficulty: recipeObj.difficulty,
-                recipe: recipe
+                recipe: recipe,
+                imgUrl: img
             })
          }) 
 
          const data= await res.json()
+         console.log('this is data', data)
 
          if(res.ok){
-            console.log('recipe succesfully saved')
             console.log(data)
          }
     } catch (error) {
@@ -101,14 +104,24 @@ export default function Main() {
                 headers:{
                     'Content-Type': 'application/json'
                 },
-                body: {
+                credentials: 'include',
+                body: JSON.stringify({
                     title: recipeObj.title
-                }
+                })
             })
 
-            const data = res.json()
+            const data = await res.json()
             console.log('img succesfully recieved')
             console.log(data)
+
+            
+            if(res.ok){
+                setImg(data)
+                console.log(data)
+                await saveRecipe(data)
+
+            }
+
 
 
         } catch (err) {
@@ -116,6 +129,7 @@ export default function Main() {
         }
     }
 
+   
     
 
 
@@ -140,7 +154,8 @@ export default function Main() {
                 <h1>Chef Claude Recommends:</h1>
                
                 <ReactMarkdown>{recipe}</ReactMarkdown>
-                <button onClick={saveRecipe} className="Save-Recipe">Save Recipe</button>
+                <button onClick={getImg} className="Save-Recipe">Save Recipe</button>
+                {img && <img src={img}/>}
             </div>
     }
         </section>
