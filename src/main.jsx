@@ -8,6 +8,7 @@ export default function Main() {
     const [recipe, setRecipe ] = React.useState("")
     const [showRecipe, setShowRecipe]= React.useState(false)
     const [recipeObj, setRecipeObj] = React.useState(null)
+    const [img, setImg] = React.useState("")
 
     const recipeSection = React.useRef(null)
 
@@ -88,6 +89,7 @@ export default function Main() {
          if(res.ok){
             console.log('recipe succesfully saved')
             console.log(data)
+            await getImg()
          }
     } catch (error) {
         console.log('An error occurred saving the recipe')
@@ -101,14 +103,20 @@ export default function Main() {
                 headers:{
                     'Content-Type': 'application/json'
                 },
-                body: {
+                body: JSON.stringify({
                     title: recipeObj.title
-                }
+                })
             })
 
-            const data = res.json()
+            const data = await res.json()
             console.log('img succesfully recieved')
             console.log(data)
+            
+            if(res.ok){
+                setImg(data)
+                console.log(data)
+            }
+
 
 
         } catch (err) {
@@ -116,6 +124,7 @@ export default function Main() {
         }
     }
 
+   
     
 
 
@@ -141,6 +150,7 @@ export default function Main() {
                
                 <ReactMarkdown>{recipe}</ReactMarkdown>
                 <button onClick={saveRecipe} className="Save-Recipe">Save Recipe</button>
+                {img && <img src={img}/>}
             </div>
     }
         </section>

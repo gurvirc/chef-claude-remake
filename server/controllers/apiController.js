@@ -1,6 +1,7 @@
 import express from 'express'
 import { recipeServices } from '../services/recipeService.js'
 import { getDBConnection } from '../db/db.js' 
+import { createApi } from 'unsplash-js';
 import dotenv from 'dotenv'
 
 export async function callAPI(req, res){
@@ -31,6 +32,26 @@ export async function addRecipe(req, res){
 }
 
 export async function getImg(req, res){
-    dotenv.config()
-    
+    /*dotenv.config()
+    const { title } = req.body
+    const response = await fetch(
+    `https://api.unsplash.com/photos/random?collections=1353633&query=${title}&count=1`,
+    { headers: { Authorization: `Client-ID ${process.env.UNSPLASH_API_KEY}` } }
+);
+const data = await response.json();
+const imgUrl = data[0]?.urls?.small || "";
+
+res.status(200).json({imgUrl})
+
+
+console.log(imgUrl)*/
+const { title } = req.body
+const response = await fetch(
+    `https://api.spoonacular.com/recipes/complexSearch?query=${title}&number=1&apiKey=${process.env.SPOONACULAR_API_KEY}`
+);
+const data = await response.json();
+const imgUrl = data.results[0]?.image;
+
+res.status(200).json(imgUrl)
+
 }
