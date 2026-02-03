@@ -21,14 +21,25 @@ export async function callAPI(req, res){
 export async function addRecipe(req, res){
 
     console.log(req.body)
-    const { title, description, servings, timeMinutes, difficulty, recipe } = req.body
-    if(!title || !description || !servings || !timeMinutes || !difficulty || !recipe){
+    const { title, description, servings, timeMinutes, difficulty, recipe, imgUrl } = req.body
+    if(!title || !description || !servings || !timeMinutes || !difficulty || !recipe ||!imgUrl){
         return res.status(400).json({error: 'Missing some attributes'})
     }
-    res.status(200).json({title, description, servings, timeMinutes, difficulty, recipe})
+    
 
-
+    try{
+    const userId= req.session.userId
+    console.log('this is the session id', userId)
     const db= await getDBConnection()
+
+    const result = await db.run(`INSERT INTO saved_recipes (userId, title, description, servings, time, difficulty, recipe, imgPath)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [userId, title, description, servings, timeMinutes, difficulty, recipe, imgUrl])
+
+        return res.status(200).json({msg: 'recipe succesfully added'})
+
+    }catch(err){
+        console.log(err)
+    }
 }
 
 export async function getImg(req, res){
