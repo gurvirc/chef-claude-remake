@@ -2,9 +2,11 @@ import ChefClaudeLogo from './images/ChefClaudeIcon.png'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom' 
 import React from 'react'
+import { authContext } from './AuthContextProvider'
 export default function Signup(){
 
     const [signUpError, setSignUperror ] = React.useState("")
+    const { name, setName } = React.useContext(authContext)
 
     const navigate= useNavigate()
     async function signUp(e){
@@ -29,6 +31,7 @@ export default function Signup(){
 
                 if(res.ok){
                     navigate('/')
+                    setName(data.name)
                     
                 }else{
                     setSignUperror(data.error)

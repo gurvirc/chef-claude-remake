@@ -41,7 +41,7 @@ export default function Header(){
             <div className="center">
                 <img src={chefClaudeLogo}></img>
                 <h1>Chef Claude V2</h1>
-                <p>{name? `Welcome, ${name}`:""}</p>
+                
             </div>
             </Link>
             <div className="login-signup">
@@ -52,6 +52,7 @@ export default function Header(){
                 <>
                     <Link to="/savedRecipes"><button className="My-recipes">My recipes</button></Link>
                     <button onClick={handleLogout}>Log out</button>
+                    
                 </>
                 }
                 <Link to="/Signup" className="login-signup">
