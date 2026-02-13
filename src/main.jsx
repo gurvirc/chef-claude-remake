@@ -6,8 +6,8 @@ export default function Main() {
     
     const [ingredients, setIngredients]=React.useState([])
     const [recipe, setRecipe ] = React.useState("")
-    const [showRecipe, setShowRecipe]= React.useState(false)
     const [recipeObj, setRecipeObj] = React.useState(null)
+    const [isLoading, setIsLoading] = React.useState(false)
     const [img, setImg] = React.useState("")
 
     const recipeSection = React.useRef(null)
@@ -25,6 +25,7 @@ export default function Main() {
     }
 
     async function handleClick(){
+        setIsLoading(true)
         try{
             const res = await fetch('http://localhost:3000/api/recipe', {
                 method: 'POST',
@@ -49,6 +50,7 @@ export default function Main() {
                 console.log('This is the recipe object')
                 console.log(recipeObj)
                 setRecipe(markDown)
+                setIsLoading(false)
             }
 
 
@@ -129,23 +131,21 @@ export default function Main() {
         }
     }
 
-   
-    
-
 
     return(
         <main>
         <form action={addIngredient} className="input-form-ingredients">
             <input type="text" name="ingredient" placeholder="   eg.oregano"></input>
             <button>+ Add Ingredient</button>
-            <button >Add Macros</button>
+          
         </form>
         <section>
             {ingredients.length>0 && 
                 <Ingredients
                     ref= {recipeSection} 
                     ingredients={ingredients} 
-                    handleClick={handleClick} 
+                    handleClick={handleClick}
+                    isLoading={isLoading}
                     listOfIngredients={listOfIngredients}/>}
         </section>
         <section className="recipe-container">
