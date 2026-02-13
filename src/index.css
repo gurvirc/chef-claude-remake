@@ -251,7 +251,13 @@ button.My-recipes:hover{
   width: 400px;
   border-radius: 12px;
   background-color: white;
-  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-card:hover{
+  transform: scale(1.05);
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .recipe-card > img{

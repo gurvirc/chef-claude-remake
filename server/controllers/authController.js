@@ -41,10 +41,11 @@ export async function registerUser(req, res) {
         }
 
         const result= await db.run('INSERT INTO user (name, username, email, password) VALUES (?, ?, ?, ?)', [name, username, email, password])
-        res.status(201).json({message: 'User succefully registered', name:`${user.name}`})//also return users name here
+        req.session.userId = result.lastID
+        res.status(201).json({message: 'User succefully registered', name: username})//also return users name here
 
         //each insertions returns last id, use this to bind session id to specified user
-        req.session.userId = result.lastID
+        
 
 
 
