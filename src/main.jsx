@@ -1,5 +1,4 @@
 import React from "react"
-import Recipe from "./Recipe"
 import Ingredients from "./Ingredients"
 import ReactMarkdown from 'react-markdown'
 import { getImg } from "./Api"
@@ -96,10 +95,6 @@ export default function Main() {
                 console.log(imgTemp)
                 setImg(imgTemp)
                 saveRecipe({recipeObj, recipe, imgTemp})
-
-                
-                
-                
             }} 
                 
                 
