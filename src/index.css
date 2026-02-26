@@ -243,6 +243,8 @@ button.My-recipes:hover{
   justify-content: space-between;
   gap: 50px;
   background-color: white;
+  border-top: 1px solid lightgrey;
+  
  
 }
 
@@ -277,9 +279,6 @@ button.My-recipes:hover{
   color: grey;
   border-top: solid 1px grey;
   padding-top: 11px;
-
-  
-  
 }
 
 .recipe-time {
