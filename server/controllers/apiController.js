@@ -66,3 +66,23 @@ export async function fetchRecipes(req, res){
 
     res.status(200).json(result)
 }
+
+export async function deleteRecipe(req, res){
+
+    if(!req.session.userId){
+        return res.status(401).json({error: 'session id does not exist'})
+    }
+
+    const {recipeId} = req.body
+    if(!recipeId){
+        return res.status(400).json({error: 'recipe id does not exist'})
+    }
+
+    const db = await getDBConnection()
+
+    await db.run('DELETE FROM saved_recipes WHERE userId = ? AND id = ?', [req.session.userId, recipeId])
+
+    res.status(200).json({message: 'recipe deleted succesfully'})
+
+    
+}

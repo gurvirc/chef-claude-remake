@@ -242,7 +242,9 @@ button.My-recipes:hover{
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 50px;
-  background-color: lightgrey;
+  background-color: white;
+  border-top: 1px solid lightgrey;
+  
  
 }
 
@@ -252,6 +254,7 @@ button.My-recipes:hover{
   border-radius: 12px;
   background-color: white;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid lightgrey;
 }
 
 .recipe-card:hover{
@@ -276,9 +279,6 @@ button.My-recipes:hover{
   color: grey;
   border-top: solid 1px grey;
   padding-top: 11px;
-
-  
-  
 }
 
 .recipe-time {
@@ -355,4 +355,14 @@ svg {
 .loading-btn{
   display: flex;
   gap: 30px;
+}
+
+.delete-icon{
+  width: 49vh;
+  padding-left: 370px;
+  margin-top: 3px;
+}
+
+.delete-icon:hover{
+  color: #B91C1C;
 }
