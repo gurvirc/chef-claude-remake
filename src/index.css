@@ -356,3 +356,13 @@ svg {
   display: flex;
   gap: 30px;
 }
+
+.delete-icon{
+  width: 49vh;
+  padding-left: 370px;
+  margin-top: 3px;
+}
+
+.delete-icon:hover{
+  color: #B91C1C;
+}
