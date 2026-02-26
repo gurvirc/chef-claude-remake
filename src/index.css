@@ -242,7 +242,7 @@ button.My-recipes:hover{
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 50px;
-  background-color: lightgrey;
+  background-color: white;
  
 }
 
@@ -252,6 +252,7 @@ button.My-recipes:hover{
   border-radius: 12px;
   background-color: white;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid lightgrey;
 }
 
 .recipe-card:hover{
