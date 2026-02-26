@@ -1,7 +1,8 @@
 import React from "react"
-import Recipe from "./Recipe"
 import Ingredients from "./Ingredients"
 import ReactMarkdown from 'react-markdown'
+import { getImg } from "./Api"
+import { saveRecipe } from "./Api"
 export default function Main() {
     
     const [ingredients, setIngredients]=React.useState([])
@@ -11,9 +12,6 @@ export default function Main() {
     const [img, setImg] = React.useState("")
 
     const recipeSection = React.useRef(null)
-
-
-    
 
     const listOfIngredients= ingredients.map(ingredient=> (
         <li key={ingredient}>{ingredient}</li>
@@ -69,68 +67,6 @@ export default function Main() {
 
     }, [recipe])
 
-   async function saveRecipe(img){
-    try {
-         const res = await fetch('http://localhost:3000/api/addRecipe', {
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                title: recipeObj.title,
-                description: recipeObj.description,
-                servings: recipeObj.servings,
-                timeMinutes: recipeObj.timeMinutes,
-                difficulty: recipeObj.difficulty,
-                recipe: recipe,
-                imgUrl: img
-            })
-         }) 
-
-         const data= await res.json()
-         console.log('this is data', data)
-
-         if(res.ok){
-            console.log(data)
-         }
-    } catch (error) {
-        console.log('An error occurred saving the recipe')
-    }
-    }
-
-    async function getImg(){
-        try {
-            const res = await fetch('http://localhost:3000/api/getImg', {
-                method: 'POST',
-                headers:{
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    title: recipeObj.title
-                })
-            })
-
-            const data = await res.json()
-            console.log('img succesfully recieved')
-            console.log(data)
-
-            
-            if(res.ok){
-                setImg(data)
-                console.log(data)
-                await saveRecipe(data)
-
-            }
-
-
-
-        } catch (err) {
-            console.log('Erro fetching img', err)
-        }
-    }
-
 
     return(
         <main>
@@ -154,7 +90,15 @@ export default function Main() {
                 <h1>Chef Claude Recommends:</h1>
                
                 <ReactMarkdown>{recipe}</ReactMarkdown>
-                <button onClick={getImg} className="Save-Recipe">Save Recipe</button>
+                <button onClick={async ()=>{
+                const imgTemp= await getImg({title: recipeObj.title})
+                console.log(imgTemp)
+                setImg(imgTemp)
+                saveRecipe({recipeObj, recipe, imgTemp})
+            }} 
+                
+                
+                className="Save-Recipe">Save Recipe</button>
                 {img && <img src={img}/>}
             </div>
     }
