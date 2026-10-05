@@ -31,9 +31,11 @@ export default function Login(){
             const data = await res.json()
 
             if(res.ok){
+                
                 navigate('/')
                 setName(data.name)
                 console.log(name)
+
             }else{
                 setLoginError(data.error)
             }
